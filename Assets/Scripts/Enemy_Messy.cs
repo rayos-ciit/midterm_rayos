@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class Enemy_Messy : MonoBehaviour
 {
-    public float hp = 3f;
+    public float hp = 1f;
     public float speed = 3f;
 
     Transform player;
@@ -10,7 +10,7 @@ public class Enemy_Messy : MonoBehaviour
     void OnEnable()
     {
         // REFACTOR: Reset stats when pulling from the pool
-        hp = 3f;
+        hp = 1f;
         transform.localScale = Vector3.one;
 
         // Reset reference in case player changes or to ensure it's found on reuse
