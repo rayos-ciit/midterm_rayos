@@ -34,15 +34,16 @@ public class Bullet_Messy : MonoBehaviour
 
     void OnCollisionEnter(Collision c)
     {
-        // Ignore if already inactive
+        // 1. Ignore if already inactive (prevents crashing)
         if (!gameObject.activeInHierarchy) return;
 
-        // Ignore the player so we don't shoot ourselves
+        // 2. Ignore the player so we don't shoot ourselves!
         if (c.gameObject.CompareTag("Player")) return;
 
-        // FIX: Ignore OTHER bullets to prevent mid-air chain reactions!
+        // 3. Ignore other bullets to prevent mid-air collisions!
         if (c.gameObject.GetComponent<Bullet_Messy>() != null) return;
 
+        // 4. Centralized creation and returning
         GameplayFactory.Instance.SpawnExplosion(transform.position);
         GameplayFactory.Instance.ReturnBullet(this);
     }
