@@ -23,7 +23,7 @@ public class InputHandler : MonoBehaviour
 
     public void HandleGameplayInput()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButtonDown(0)) 
         {
             shootCommand.Execute();
         }
