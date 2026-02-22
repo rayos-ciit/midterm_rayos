@@ -34,6 +34,9 @@ public class Bullet_Messy : MonoBehaviour
 
     void OnCollisionEnter(Collision c)
     {
+        // FIX: If the bullet is already inactive (returned to pool), ignore any other collisions this frame!
+        if (!gameObject.activeInHierarchy) return;
+
         // REFACTOR: Centralized creation through the Factory
         GameplayFactory.Instance.SpawnExplosion(transform.position);
         
