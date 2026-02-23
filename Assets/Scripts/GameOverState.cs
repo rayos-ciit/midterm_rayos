@@ -11,7 +11,7 @@ public class GameOverState : IGameState
 
     public void Enter()
     {
-        Time.timeScale = 0.7f; // Weird slowmo from original code
+        Time.timeScale = 0.7f; //slowmo from original code
     }
 
     public void Tick()

@@ -12,14 +12,14 @@ public class InputHandler : MonoBehaviour
 
     void Start()
     {
-        // Initialize the commands
+        //initialize commands
         shootCommand = new ShootCommand(firePoint, bulletSpeed);
         pauseCommand = new PauseCommand();
         restartCommand = new RestartCommand();
     }
-
-    // By separating these into methods, our upcoming State Machine can decide 
-    // exactly WHEN the game is allowed to listen to these inputs!
+    
+    
+    //separated methods allows the state machine to decide what the game is allowed to listen to specific inputs.
 
     public void HandleGameplayInput()
     {

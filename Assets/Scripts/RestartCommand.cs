@@ -4,7 +4,7 @@ public class RestartCommand : ICommand
 {
     public void Execute()
     {
-        // Reloads the active scene
+        //reloads the active scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

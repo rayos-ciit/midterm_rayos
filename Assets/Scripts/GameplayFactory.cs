@@ -65,32 +65,29 @@ public class GameplayFactory : MonoBehaviour
         );
     }
 
-    // --- FACTORY CREATION METHODS ---
-    // These match your professor's exact required method signatures
-
-    public Bullet_Messy SpawnBullet(Vector3 position, Quaternion rotation) // [cite: 35]
+    public Bullet_Messy SpawnBullet(Vector3 position, Quaternion rotation)
     {
         Bullet_Messy bullet = bulletPool.Get();
         bullet.transform.SetPositionAndRotation(position, rotation);
         return bullet;
     }
 
-    public Enemy_Messy SpawnEnemy(Vector3 position, Quaternion rotation) // [cite: 36]
+    public Enemy_Messy SpawnEnemy(Vector3 position, Quaternion rotation)
     {
         Enemy_Messy enemy = enemyPool.Get();
         enemy.transform.SetPositionAndRotation(position, rotation);
         return enemy;
     }
 
-    public ExplosionFX_Messy SpawnExplosion(Vector3 position) // [cite: 37]
+    public ExplosionFX_Messy SpawnExplosion(Vector3 position)
     {
         ExplosionFX_Messy fx = explosionPool.Get();
         fx.transform.position = position;
         return fx;
     }
-
-    // --- METHODS TO RETURN OBJECTS TO THE POOL ---
+    
     // This allows us to replace Destroy() with Release()
+    //using release instead of destroy 
 
     public void ReturnBullet(Bullet_Messy bullet) => bulletPool.Release(bullet);
     public void ReturnEnemy(Enemy_Messy enemy) => enemyPool.Release(enemy);

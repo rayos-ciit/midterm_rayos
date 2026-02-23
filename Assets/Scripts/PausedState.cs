@@ -11,12 +11,12 @@ public class PausedState : IGameState
 
     public void Enter()
     {
-        Time.timeScale = 0f; // Freeze game
+        Time.timeScale = 0f; //Freeze game
     }
 
     public void Tick()
     {
-        // Only listen for the unpause button
+        //Only listen for the unpause button
         game.inputHandler.HandlePauseInput();
     }
 

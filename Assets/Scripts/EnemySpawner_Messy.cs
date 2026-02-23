@@ -6,7 +6,7 @@ public class EnemySpawner_Messy : MonoBehaviour
     public float spawnInterval = 0.6f;
     private float spawnTimer;
 
-    // Notice we don't use Update() here. The PlayingState calls TickSpawner()!
+    //using tickspawner instead of update since the system is mostly physics
     public void TickSpawner()
     {
         spawnTimer += Time.deltaTime;

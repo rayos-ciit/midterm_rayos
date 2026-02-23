@@ -8,7 +8,7 @@ public class GameController_Messy : MonoBehaviour
     public InputHandler inputHandler;
     public EnemySpawner_Messy spawner;
 
-    // State Machine Variables
+    //game state variables
     private IGameState currentState;
     public PlayingState playingState;
     public PausedState pausedState;
@@ -21,18 +21,18 @@ public class GameController_Messy : MonoBehaviour
 
     void Start()
     {
-        // Initialize States
+        //initialize
         playingState = new PlayingState(this);
         pausedState = new PausedState(this);
         gameOverState = new GameOverState(this);
 
-        // Start the game in the playing state
+        //always starts the game in playingstate
         ChangeState(playingState);
     }
 
     void Update()
     {
-        // The GameController only runs the current state's Tick() now!
+        //gameController only runs the current state's Tick()
         if (currentState != null)
         {
             currentState.Tick();
@@ -50,9 +50,7 @@ public class GameController_Messy : MonoBehaviour
         currentState.Enter();
     }
 
-    // --- METHODS CALLED BY COMMANDS OR OTHER SCRIPTS ---
-
-    // THIS FIXES YOUR COMPILER ERROR!
+    //pressing "esc" triggers pause and untriggers it based on what the current state is 
     public void TogglePause()
     {
         if (currentState == playingState)
@@ -61,6 +59,7 @@ public class GameController_Messy : MonoBehaviour
             ChangeState(playingState);
     }
 
+    //calls gameover
     public void GameOver()
     {
         ChangeState(gameOverState);

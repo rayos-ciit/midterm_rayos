@@ -9,11 +9,9 @@ public class Enemy_Messy : MonoBehaviour
 
     void OnEnable()
     {
-        // REFACTOR: Reset stats when pulling from the pool
         hp = 1f;
         transform.localScale = Vector3.one;
 
-        // Reset reference in case player changes or to ensure it's found on reuse
         GameObject p = GameObject.FindGameObjectWithTag("Player");
         if (p != null) player = p.transform;
     }
@@ -21,9 +19,6 @@ public class Enemy_Messy : MonoBehaviour
     void Update()
     {
         if (player == null) return;
-
-        // Note: Removed the tight coupling to GameController's magic numbers!
-        // The State Pattern will handle freezing/pausing the game later.
 
         transform.position = Vector3.MoveTowards(transform.position, player.position, speed * Time.deltaTime);
         transform.LookAt(player.position);
@@ -33,16 +28,24 @@ public class Enemy_Messy : MonoBehaviour
 
     void OnCollisionEnter(Collision c)
     {
-        Bullet_Messy b = c.gameObject.GetComponent<Bullet_Messy>();
-        if (b != null)
+        //hit the player trigger game over
+        if (c.gameObject.CompareTag("Player"))
         {
-            hp -= 1f;
-            if (hp <= 0)
+            if (GameController_Messy.I != null)
             {
-                // REFACTOR: Use Factory for explosion and returning to pool
-                GameplayFactory.Instance.SpawnExplosion(transform.position);
-                GameplayFactory.Instance.ReturnEnemy(this);
+                GameController_Messy.I.GameOver(); 
             }
+        }
+    }
+
+    //The bullet will call this directly to guarantee damage applies!
+    public void Hit()
+    {
+        hp -= 1f;
+        if (hp <= 0)
+        {
+            GameplayFactory.Instance.SpawnExplosion(transform.position);
+            GameplayFactory.Instance.ReturnEnemy(this);
         }
     }
 }
